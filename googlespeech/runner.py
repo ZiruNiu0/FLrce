@@ -8,7 +8,7 @@ import flwr as fl
 import random
 
 NUM_SIMS = 1
-ROUNDS = 100
+ROUNDS = 1
 FF = 0.1
 FE = 1
 MFC = 10
