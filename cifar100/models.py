@@ -4,7 +4,7 @@ import torch
 import numpy as np
 from util import top_k_sparsification, get_filters
 
-NUM_CLASSES = 20
+NUM_CLASSES = 100
 CHANNELS = 3
 
 class CNN(nn.Module):

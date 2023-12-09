@@ -24,7 +24,7 @@ Batch = 128
 DEVICE = torch.device("cpu")
 MAX_EXPLOIT_RATE = 1.0
 DECAY_FACTOR = 1
-CLASSES = 20
+CLASSES = 100
 
 class FLrce_strategy(fl.server.strategy.FedAvg):
     def __init__(self, ff, fe, mfc, mec, mac, accuracies=[], ClientsSelection=[], HighestConsensus=[], AvgConsensus=[], HCperround=[], ESCriteria=[]):

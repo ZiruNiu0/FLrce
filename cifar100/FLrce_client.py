@@ -17,7 +17,7 @@ from flwr.server.criterion import Criterion
 import numpy as np
 
 DEVICE = torch.device("cpu") # Try "cuda" to train on GPU
-CLASSES = 20
+CLASSES = 100
 CHANNELS = 3
 
 class FLrce_client(fl.client.Client):

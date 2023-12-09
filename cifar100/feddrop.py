@@ -16,7 +16,7 @@ from cifar100dataset import cifar100Dataset
 from util import get_filters, get_parameters, set_filters, spu_aggregation, generate_filters_random, parameters_to_ndarrays, merge_subnet
 CHANNEL = 3
 Batch = 128
-CLASSES = 20
+CLASSES = 100
 
 class dropout_strategy(fl.server.strategy.FedAvg):
     def __init__(self, ff, fe, mfc, mec, mac, ACC=[], ClientsSelection=[]):

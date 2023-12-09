@@ -14,7 +14,7 @@ from copy import deepcopy
 import numpy as np
 
 DEVICE = torch.device('cpu')
-CLASSES = 20
+CLASSES = 100
 CHANNELS = 3
 OTHER_PARAMS = ['bn1.num_batches_tracked', 'bn2.num_batches_tracked']
 

@@ -18,7 +18,7 @@ from cifar100dataset import cifar100Dataset
 from util import get_filters, get_parameters, set_filters, spu_aggregation, compute_sum, parameters_to_ndarrays, top_k_sparsification
 CHANNEL = 3
 Batch = 128
-CLASSES = 20
+CLASSES = 100
 OTHER_PARAMS = ['bn1.num_batches_tracked', 'bn2.num_batches_tracked']
 
 class fedcom_strategy(fl.server.strategy.FedAvg):

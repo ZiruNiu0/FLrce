@@ -11,7 +11,7 @@ from flwr.common import ndarrays_to_parameters, parameters_to_ndarrays, FitRes
 FILTER_PARAMS = ['conv1.weight', 'conv2.weight', 'fc.weight', 'fc1.weight', 'fc2.weight']
 OTHER_PARAMS = ['bn1.num_batches_tracked', 'bn2.num_batches_tracked']
 NUM_CHANNELS = 3
-CLASSES = 20
+CLASSES = 100
 
 Learnable_Params = ['conv1.weight', 'conv1.bias', 'bn1.weight', 'bn1.bias', 
                     'conv2.weight', 'conv2.bias', 'bn2.weight', 'bn2.bias',
