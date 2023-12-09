@@ -64,7 +64,6 @@ class fedprox_strategy(fl.server.strategy.FedAvg):
         cid = client.cid
         param, num = parameters_to_ndarrays(fit_res.parameters), fit_res.num_examples
         Fit_res.append((param, num))
-      #for params, size, rate in weights_results:
       new_model = aggregate(Fit_res)
       # Aggregate custom metrics if aggregation fn was provided
       metrics_aggregated = {}
@@ -87,7 +86,6 @@ class fedprox_strategy(fl.server.strategy.FedAvg):
         parameters = get_filters(self.global_model)
         for client in clients:
             config = {}
-            #parameters = self.personal_models[int(client.cid)]
             fit_ins = FitIns(ndarrays_to_parameters(parameters), config)
             config_evaluate_list.append((client, fit_ins))
         return config_evaluate_list

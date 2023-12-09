@@ -6,11 +6,8 @@ from flwr.common import Code, EvaluateIns, EvaluateRes, FitRes, Status
 from models import CNN
 import torch
 from torch.utils.data import DataLoader, random_split
-from typing import Dict
 from util import set_filters, get_filters, merge_subnet, get_subnet
 from flwr.common import Code, EvaluateIns, EvaluateRes, FitIns, FitRes, Status
-import numpy as np
-from typing import List
 
 DEVICE = torch.device('cpu')
 CLASSES = 100
@@ -51,7 +48,7 @@ class feddrop_client(fl.client.Client):
         parameters_original = ins.parameters
         ndarrays_original = parameters_to_ndarrays(parameters_original)
         set_filters(self.testmodel, ndarrays_original)
-        loss, accuracy = self.test() # return float(loss), len(self.valloader), {"accuracy": float(accuracy)}
+        loss, accuracy = self.test()
         # Build and return response
         status = Status(code=Code.OK, message="Success")
         return EvaluateRes(

@@ -20,7 +20,6 @@ class CNN(nn.Module):
         self.fc2 = nn.Linear(max(1, int(120*rate)), max(1, int(84*rate)), bias=False)
         self.fc = nn.Linear(max(1, int(84*rate)), outputs)
         self.tanh = nn.Tanh()
-        #self.avgpool = nn.AdaptiveAvgPool2d((2,2))
     
     def forward(self, x):
         x = self.conv1(x)
@@ -34,11 +33,7 @@ class CNN(nn.Module):
         #x = self.avgpool(x)
         x = x.reshape(x.shape[0], -1)
         x = self.tanh(self.act(self.fc1(x)))
-        #print(f"output of the first fc layer = {x}\n")
         x = self.tanh(self.act(self.fc2(x)))
-        #print(f"output of the second fc layer = {x}\n")
-        #x = self.fc1(x)
-        #x = self.fc2(x)
         x = self.fc(x)
         return x
 
@@ -50,11 +45,3 @@ def add_group_lasso(model:CNN):
     fc1_weight_lasso = model.fc1.weight.pow(2).sum(dim=(1)).pow(0.5).sum()
     fc2_weight_lasso = model.fc2.weight.pow(2).sum(dim=(1)).pow(0.5).sum()
     return filter_lasso_1 + channel_lasso_1 + filter_lasso_2 + channel_lasso_2 + fc1_weight_lasso + fc2_weight_lasso
-
-if __name__ == "__main__":
-    my_model = CNN(CHANNELS)
-    #for p in my_model.parameters():
-    #    print(f"type = {type(p)}, value = {p}")
-    Z = get_filters(my_model)
-    spar = top_k_sparsification(0.5, Z)
-    print(f"spar = {spar}")

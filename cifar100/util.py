@@ -82,12 +82,6 @@ def number_of_non_zero_elements(w:List[np.ndarray]):
     return n
 
 def get_cosine_similarity(w1: List[np.ndarray], w2: List[np.ndarray]) -> float:
-    '''
-    v1, v2 = [], []
-    for w1_, w2_ in zip(w1, w2):
-        v1 = np.append(v1, w1_.flatten())
-        v2 = np.append(v2, w2_.flatten())
-    '''
     v1, v2 = get_joint(w1, w2)
     dot_product = np.dot(v1, v2)
     n1 = np.sqrt(np.dot(v1, v1))
@@ -399,12 +393,6 @@ def generate_filters_random(global_model:torch.nn.Module, rate):
                         lastindices.append(q_)
                 sub_param_1 = torch.index_select(w, 0, torch.tensor(non_masked_filter_ids))
                 sub_param = torch.index_select(sub_param_1, 1, torch.tensor(lastindices))
-            #elif name == 'fc1.bias':
-            #    w = param_dict[name] 
-            #    total_filters = w.shape[0]
-            #    num_selected_filters = max(1, int(total_filters * rate))
-            #    non_masked_filter_ids = drop_information['fc1.weight']
-            #    sub_param = torch.index_select(w,0,torch.tensor(non_masked_filter_ids))
             elif name == 'fc2.weight':
                 w = param_dict[name]
                 total_filters = w.shape[0]

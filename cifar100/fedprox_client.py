@@ -37,7 +37,6 @@ class fedprox_client(fl.client.Client):
         set_filters(self.model, parameters_to_ndarrays(sub_params))
         globalmodel = CNN(in_channels=CHANNELS, outputs=CLASSES).to(DEVICE)
         set_filters(globalmodel, parameters_to_ndarrays(sub_params))
-        # masking channels:
         self.train(globalmodel)
         # Serialize ndarray's into a Parameters object
         updated_model = get_filters(self.model)
@@ -48,7 +47,7 @@ class fedprox_client(fl.client.Client):
         # Deserialize parameters to NumPy ndarray's
         parameters_original = ins.parameters
         set_filters(self.testmodel, parameters_to_ndarrays(parameters_original))
-        loss, accuracy = self.test() # return float(loss), len(self.valloader), {"accuracy": float(accuracy)}
+        loss, accuracy = self.test()
         # Build and return response
         status = Status(code=Code.OK, message="Success")
         return EvaluateRes(
