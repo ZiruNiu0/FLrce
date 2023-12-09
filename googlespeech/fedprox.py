@@ -124,13 +124,6 @@ def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
   return {"accuracy": sum(accuracies) / sum(examples)}
 
 def fedprox_client_fn(cid) -> fedprox_client:
-  '''
-  Epoch = 5
-  if int(cid) % 3 == 1:
-     Epoch -= 2
-  elif int(cid) % 3 == 2:
-     Epoch -= 1
-  '''
   Epoch = random.choice([3,4,5])
   dataset = voice_dataset("clientdata/google_speech_unbalanced_client_"+str(cid)+"_ALPHA_0.1.csv")
   return fedprox_client(cid, dataset, Epoch, Batch)

@@ -47,7 +47,7 @@ class fedprox_client(fl.client.Client):
         # Deserialize parameters to NumPy ndarray's
         parameters_original = ins.parameters
         set_filters(self.testmodel, parameters_to_ndarrays(parameters_original))
-        loss, accuracy = self.test() # return float(loss), len(self.valloader), {"accuracy": float(accuracy)}
+        loss, accuracy = self.test()
         # Build and return response
         status = Status(code=Code.OK, message="Success")
         return EvaluateRes(

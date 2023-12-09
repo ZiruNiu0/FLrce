@@ -9,9 +9,6 @@ from torch.utils.data import DataLoader, random_split
 from typing import Dict
 from util import set_filters, get_filters, compute_update, top_k_sparsification
 from flwr.common import Code, EvaluateIns, EvaluateRes, FitIns, FitRes, Status
-from typing import List
-from copy import deepcopy
-import numpy as np
 
 DEVICE = torch.device('cpu')
 CLASSES = 35
@@ -50,7 +47,7 @@ class fedcom_client(fl.client.Client):
         # Deserialize parameters to NumPy ndarray's
         parameters_original = ins.parameters
         set_filters(self.testmodel, parameters_to_ndarrays(parameters_original))
-        loss, accuracy = self.test() # return float(loss), len(self.valloader), {"accuracy": float(accuracy)}
+        loss, accuracy = self.test()
         # Build and return response
         status = Status(code=Code.OK, message="Success")
         return EvaluateRes(

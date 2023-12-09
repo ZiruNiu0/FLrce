@@ -1,10 +1,7 @@
-from typing import List, Tuple, Union, Dict
+from typing import List, Tuple, Union
 from models import CNN
 from fedcom_client import fedcom_client
-from copy import deepcopy
-import torch
 import flwr as fl
-import numpy as np
 import random
 from flwr.common import Metrics
 from flwr.common import FitIns, FitRes

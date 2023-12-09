@@ -5,7 +5,7 @@ from typing import Dict, List
 from copy import deepcopy
 from collections import OrderedDict
 from flwr.server.strategy.aggregate import aggregate
-from flwr.common import ndarrays_to_parameters, parameters_to_ndarrays, FitRes
+from flwr.common import parameters_to_ndarrays, FitRes
 
 FILTER_PARAMS = ['conv1.weight', 'conv2.weight', 'fc.weight']
 OTHER_PARAMS = ['bn1.num_batches_tracked', 'bn2.num_batches_tracked']

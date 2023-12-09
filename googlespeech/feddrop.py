@@ -65,13 +65,9 @@ class dropout_strategy(fl.server.strategy.FedAvg):
         return None, {}
       # Convert results
       Fit_res = []
-      current_parameter = get_filters(self.global_model)
       for _, fit_res in results:
         Fit_res.append(fit_res)
-        #Fit_res.append((full_parameters, num))
-      #for params, size, rate in weights_results:
       aggregated_parameters = spu_aggregation(Fit_res, get_filters(self.global_model))
-      #aggregated_parameters = aggregate(Fit_res)
       # Aggregate custom metrics if aggregation fn was provided
       metrics_aggregated = {}
       if self.fit_metrics_aggregation_fn:

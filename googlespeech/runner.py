@@ -14,7 +14,7 @@ FE = 1
 MFC = 10
 MEC = 100
 MAC = 100
-'''
+
 for i in range(NUM_SIMS):
     randseed = random.randint(0, 99999)
     random.seed(randseed)
@@ -69,7 +69,7 @@ for i in range(NUM_SIMS):
             for item in test_acc:
                 # write each item on a new line
                 fp.write("%f\n" % item)
-'''
+
 for i in range(NUM_SIMS):
     randseed = random.randint(0, 99999)
     random.seed(randseed)
@@ -88,7 +88,7 @@ for i in range(NUM_SIMS):
             for item in test_acc:
                 # write each item on a new line
                 fp.write("%f\n" % item)
-'''
+
 for i in range(NUM_SIMS):
     randseed = random.randint(0, 99999)
     random.seed(randseed)
@@ -107,4 +107,3 @@ for i in range(NUM_SIMS):
             for item in test_acc:
                 # write each item on a new line
                 fp.write("%f\n" % item)
-'''

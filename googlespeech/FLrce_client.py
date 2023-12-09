@@ -10,7 +10,7 @@ from typing import Dict
 from util import set_filters, get_filters
 from flwr.common import Code, EvaluateIns, EvaluateRes, FitIns, FitRes, Status
 from flwr.server.client_manager import SimpleClientManager
-from typing import Dict, Optional, List
+from typing import Dict, Optional
 from logging import INFO
 from flwr.common.logger import log
 from flwr.server.criterion import Criterion

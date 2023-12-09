@@ -134,7 +134,6 @@ class FLrce_strategy(fl.server.strategy.FedAvg):
             cid = client.cid
             selected_clients.append(cid)
             param, num = parameters_to_ndarrays(fit_res.parameters), fit_res.num_examples
-            #other_params = fit_res.metrics["others"]
             self.record_latest_starting_point(cid, param)
             self.set_last_update_round(cid, server_round)
             self.record_latest_local_update(cid, param, current_parameter)
@@ -285,13 +284,10 @@ class FLrce_strategy(fl.server.strategy.FedAvg):
     def update_current_relationship(self, id:str, my_parameter, results, Alpha=0.9):
         if len(results) > 1:
             global_parameter = get_filters(self.global_model)
-            #merged_parameter = my_parameter
-            #merged_parameter = merge_subnet(my_parameter, global_parameter, drop_info)
             this_update = compute_update(my_parameter, global_parameter)
             for client, fitres in results:
                 k = client.cid
                 new_local_parameter = parameters_to_ndarrays(fitres.parameters)
-                #local_parameter = merge_subnet(new_local_parameter, global_parameter, merge_info)
                 local_update = compute_update(new_local_parameter, global_parameter)
                 new_value = get_cosine_similarity(local_update, this_update)
                 old_value = self.relation_map[int(id)][int(k)]
@@ -316,7 +312,6 @@ class FLrce_strategy(fl.server.strategy.FedAvg):
         for client, fitres in results:
             num_clients += 1
             id = client.cid
-            #drop_info = fitres.metrics["drop_info"]
             new_local_parameter = parameters_to_ndarrays(fitres.parameters)
             local_update = compute_update(new_local_parameter, get_filters(self.global_model))
             for k, f in results:

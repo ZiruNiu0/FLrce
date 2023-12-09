@@ -1,11 +1,7 @@
 from torch.utils.data import Dataset
 from torchvision import transforms
 import torch
-import os
 import pandas as pd
-import librosa
-
-SAMPLE_RATE = 16000
 
 class voice_dataset(Dataset):
     def __init__(self, csv_file):
