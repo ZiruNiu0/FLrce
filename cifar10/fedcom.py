@@ -58,11 +58,6 @@ class fedcom_strategy(fl.server.strategy.FedAvg):
             cid = int(client.cid)
             config = {}
             config['Residual'] = self.local_residuals[cid]
-            #personal_model = self.local_models[cid]
-            #if self.latest_local_update == None:
-            #    sub_parameters = personal_model
-            #else:
-            #    sub_parameters = compute_sum(personal_model, self.latest_local_update)
             sub_parameters = get_filters(self.global_model)
             fit_ins = FitIns(ndarrays_to_parameters(sub_parameters), config)
             config_fit_list.append((client, fit_ins))
@@ -84,14 +79,9 @@ class fedcom_strategy(fl.server.strategy.FedAvg):
         Fit_res.append((param, 1))
         self.local_residuals[int(cid)] = fit_res.metrics["Residual"]
         self.local_models[int(cid)] = fit_res.metrics["personal model"]
-      #for params, size, rate in weights_results:
       aggregated_updates = aggregate(Fit_res)
       current_global_model = get_filters(self.global_model)
-      #gradient_mask = self.get_gradient_mask(aggregated_updates)
-      #sparsed_global_gradient = self.sparse_gradient(gradient_mask, aggregated_updates)
-      #print(f"sparsed global gradient = {sparsed_global_gradient}")
       self.latest_local_update = top_k_sparsification(self.droprate, aggregated_updates)
-      #print(f"received updates = {aggregated_updates}")
       new_model = compute_sum(current_global_model, aggregated_updates)
       # Aggregate custom metrics if aggregation fn was provided
       metrics_aggregated = {}

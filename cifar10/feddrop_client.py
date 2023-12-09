@@ -51,7 +51,7 @@ class feddrop_client(fl.client.Client):
         parameters_original = ins.parameters
         ndarrays_original = parameters_to_ndarrays(parameters_original)
         set_filters(self.testmodel, ndarrays_original)
-        loss, accuracy = self.test() # return float(loss), len(self.valloader), {"accuracy": float(accuracy)}
+        loss, accuracy = self.test()
         # Build and return response
         status = Status(code=Code.OK, message="Success")
         return EvaluateRes(
@@ -134,11 +134,6 @@ class feddrop_client(fl.client.Client):
                         for w_ in range(params.shape[1]):
                             if not w_ in last_indices:
                                 params[w][w_] = 0
-            #elif k == 'fc1.bias':
-            #    params = model_params[layer_count]
-            #    for w in range(params.shape[0]):
-            #        if w not in mask3:
-            #            params[w] = 0
             elif k == 'fc2.weight':
                 params = model_params[layer_count]
                 for w in range(params.shape[0]):
@@ -148,11 +143,6 @@ class feddrop_client(fl.client.Client):
                         for w_ in range(params.shape[1]):
                             if not w_ in mask3:
                                 params[w][w_] = 0
-            #elif k == 'fc2.bias':
-            #    params = model_params[layer_count]
-            #    for w in range(params.shape[0]):
-            #        if w not in mask4:
-            #            params[w] = 0
             elif k == 'fc.weight':
                 params = model_params[layer_count]
                 for w in range(CLASSES):

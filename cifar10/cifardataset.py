@@ -36,27 +36,3 @@ class cifar10Dataset(Dataset):
         if self.transform:
             image = self.transform(x)
         return image, y_label
-
-def create_unbalanced_datasets(alpha, clients=CLIENTS):
-    csvfile = open('cifar10_global_train.csv', 'r')
-    datareader = csv.reader(csvfile)
-    distributed_data = {}
-    alphas = np.ones(clients) * alpha
-    dirichlet_variables = np.random.dirichlet(alphas, size=1)
-    candidates = list(range(clients))
-    for i in range(clients):
-        distributed_data[i] = []
-    for row in datareader:
-        client = random.choices(candidates,weights=list(dirichlet_variables.flatten()), k=1)[0]
-        distributed_data[client].append(row)
-    for c in range(clients):
-        print(f"Writing file for Client {c}...")
-        dataname = "clientdata/cifar10_client_" + str(c) + "_ALPHA_" + str(alpha) + ".csv"
-        with open(dataname, 'w', newline='') as f:
-            writer = csv.writer(f)
-            for row in distributed_data[c]:
-                writer.writerow(row)
-
-if __name__ == "__main__":
-  alpha = 1.0
-  create_unbalanced_datasets(alpha)

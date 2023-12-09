@@ -7,7 +7,7 @@ from models import CNN
 import torch
 from torch.utils.data import DataLoader, random_split
 from typing import Dict
-from util import set_filters, get_filters, merge_subnet, get_subnet, compute_update, compute_sum
+from util import set_filters, get_filters
 from flwr.common import Code, EvaluateIns, EvaluateRes, FitIns, FitRes, Status
 from typing import List
 from copy import deepcopy
@@ -48,7 +48,7 @@ class fedprox_client(fl.client.Client):
         # Deserialize parameters to NumPy ndarray's
         parameters_original = ins.parameters
         set_filters(self.testmodel, parameters_to_ndarrays(parameters_original))
-        loss, accuracy = self.test() # return float(loss), len(self.valloader), {"accuracy": float(accuracy)}
+        loss, accuracy = self.test()
         # Build and return response
         status = Status(code=Code.OK, message="Success")
         return EvaluateRes(

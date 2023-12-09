@@ -9,11 +9,11 @@ from flwr.common import FitIns, FitRes
 from flwr.server.client_manager import ClientManager
 from flwr.server.client_proxy import ClientProxy
 from flwr.common import ndarrays_to_parameters
-from flwr.server.strategy.aggregate import weighted_loss_avg, aggregate
+from flwr.server.strategy.aggregate import weighted_loss_avg
 from flwr.common.logger import log
 from logging import WARNING
 from cifardataset import cifar10Dataset
-from util import get_filters, get_parameters, set_filters, spu_aggregation, generate_filters_random, parameters_to_ndarrays, merge_subnet
+from util import get_filters, get_parameters, set_filters, spu_aggregation, generate_filters_random
 CHANNEL = 3
 Batch = 128
 CLASSES = 10
@@ -67,8 +67,6 @@ class dropout_strategy(fl.server.strategy.FedAvg):
       for _, fit_res in results:
         Fit_res.append(fit_res)
       aggregated_parameters = spu_aggregation(Fit_res, current_parameter)
-      #aggregated_parameters = aggregate(Fit_res)
-      # Aggregate custom metrics if aggregation fn was provided
       metrics_aggregated = {}
       if self.fit_metrics_aggregation_fn:
           fit_metrics = [(res.num_examples, res.metrics) for _, res in results]
