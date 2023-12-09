@@ -87,7 +87,6 @@ class fedprox_strategy(fl.server.strategy.FedAvg):
         parameters = get_filters(self.global_model)
         for client in clients:
             config = {}
-            #parameters = self.personal_models[int(client.cid)]
             fit_ins = FitIns(ndarrays_to_parameters(parameters), config)
             config_evaluate_list.append((client, fit_ins))
         return config_evaluate_list

@@ -6,10 +6,8 @@ from flwr.common import Code, EvaluateIns, EvaluateRes, FitRes, Status
 from models import CNN
 import torch
 from torch.utils.data import DataLoader, random_split
-from typing import Dict
 from util import set_filters, get_filters, compute_update, top_k_sparsification
 from flwr.common import Code, EvaluateIns, EvaluateRes, FitIns, FitRes, Status
-import numpy as np
 
 DEVICE = torch.device('cpu')
 CLASSES = 62

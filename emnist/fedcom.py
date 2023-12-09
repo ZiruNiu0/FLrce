@@ -76,7 +76,6 @@ class fedcom_strategy(fl.server.strategy.FedAvg):
         Fit_res.append((param, 1))
         self.local_residuals[int(cid)] = fit_res.metrics["Residual"]
         self.local_models[int(cid)] = fit_res.metrics["personal model"]
-      #for params, size, rate in weights_results:
       aggregated_updates = aggregate(Fit_res)
       current_global_model = get_filters(self.global_model)
       self.latest_local_update = top_k_sparsification(self.droprate, aggregated_updates)

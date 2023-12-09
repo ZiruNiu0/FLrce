@@ -15,18 +15,15 @@ class CNN(nn.Module):
         self.fc = nn.Linear(max(1, int(20*rate))*7*7, outputs)
     
     def forward(self, x):
-        #print(f"shape of x is {x.shape}")
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.act(x)
         x = self.pool(x)
-        #print(f"shape of x is {x.shape}")
         x = self.conv2(x)
         x = self.bn2(x)
         x = self.act(x)
         x = self.pool(x)
         x = x.reshape(x.shape[0], -1)
-        #print(f"shape of x is {x.shape}")
         x = self.fc(x)
         return x
 
@@ -36,8 +33,3 @@ def add_group_lasso(model:CNN):
     filter_lasso_2 = model.conv2.weight.pow(2).sum(dim=(3,2)).pow(0.5).sum()
     channel_lasso_2 = model.conv2.weight.pow(2).sum(dim=(3,2,1)).pow(0.5).sum()
     return filter_lasso_1 + channel_lasso_1 + filter_lasso_2 + channel_lasso_2
-
-if __name__ == "__main__":
-    my_model = CNN(CHANNELS)
-    for k, v in my_model.state_dict().items():
-        print(f"layer name: {k}, shape: {v.shape}")

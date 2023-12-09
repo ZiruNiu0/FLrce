@@ -1,14 +1,6 @@
-import os
 import pandas as pd
 import torch
-import random
-import csv
-import json
-import numpy as np
-from copy import deepcopy
 from torch.utils.data import Dataset
-from PIL import Image
-from collections import OrderedDict, defaultdict
 
 class EmnistDataset(Dataset):
     def __init__(self, csv_file):
