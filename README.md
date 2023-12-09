@@ -1,0 +1,1 @@
+To run the experiment on a particular test, please navigate to the corresponding folder and run "python runner.py" in the terminal.
