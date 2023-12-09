@@ -63,7 +63,7 @@ class feddrop_client(fl.client.Client):
 
     def train(self):
         criterion = torch.nn.CrossEntropyLoss()
-        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.01)
+        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.1)
         self.model.train()
         for e in range(self.local_epoch):
             for samples, labels in self.trainloader:
